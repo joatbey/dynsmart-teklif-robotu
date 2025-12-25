@@ -252,7 +252,7 @@
         
         activeData.forEach((d, i) => {
             if(d.gap) {
-                grid.innerHTML += <tr class="gap-row"><td colspan="7"></td></tr>;
+                grid.innerHTML += `<tr class="gap-row"><td colspan="7"></td></tr>`;
                 return;
             }
             
@@ -376,7 +376,7 @@
 
         activeData.forEach((d, i) => {
             if(d.gap) return;
-            const row = document.querySelector(tr[data-idx="${i}"]);
+            const row = document.querySelector(`tr[data-idx="${i}"]`);
             if(!row) return;
 
             // Ödenecek Adedi Hesapla (Kurala göre)
@@ -425,7 +425,7 @@
     // WORD ÇIKTISI
     function createProfessionalWord() {
         let rawClientName = document.getElementById('clientName').value || "Sayın Müşteri";
-        let safeFilename = rawClientName.replace(/[^a-zA-Z0-9şŞıİğĞüÜöÖçÇ\s-]/g, "").trim().replace(/\s+/g, "");
+        let safeFilename = rawClientName.replace(/[^a-zA-Z0-9şŞıİğĞüÜöÖçÇ\s-_]/g, "").trim().replace(/\s+/g, "_");
         
         const dateStr = new Date().toLocaleDateString('tr-TR');
         const kur = escapeHtml(document.getElementById('vKur').value);
@@ -494,8 +494,8 @@
                 <br><br><br>
                 <table style="width:100%;">
                     <tr>
-                        <td style="width:50%; text-align:center;"><strong>Onaylayan (Müşteri)</strong><br><br><br>________</td>
-                        <td style="width:50%; text-align:center;"><strong>DynSmart Yetkili</strong><br><br><br>________</td>
+                        <td style="width:50%; text-align:center;"><strong>Onaylayan (Müşteri)</strong><br><br><br>____________________</td>
+                        <td style="width:50%; text-align:center;"><strong>DynSmart Yetkili</strong><br><br><br>____________________</td>
                     </tr>
                 </table>
             </body>
@@ -506,7 +506,7 @@
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = DynSmart_Teklif_${safeFilename}.doc;
+        link.download = `DynSmart_Teklif_${safeFilename}.doc`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
